@@ -2,9 +2,8 @@
 #include <assert.h>
 #include "memory_management.h"
 #include <pthread.h>
-#include <semaphore.h>
 #include <stdlib.h>
-#include "memory_management_main1.h"
+
 
 #define NUMBER_PROCESSES 10
 #define FREE_FRAMES_NUMBER 96
@@ -79,6 +78,7 @@ main()
 		   PFN_LENGTH,	// length_PFN_in_bits,	
 		   OFFSET_LENGTH,	// length_offset_in_bits,	
 		   TLB_SIZE);	// tlb_size
+
 
   printf("First we test if the program still works with one single process\n");
 

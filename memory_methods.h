@@ -24,7 +24,7 @@ int check_pf_node_exists(node_node *node);
 node_node* remove_first_node(node_node *head); 
 node_node* process1(uint64_t virtual_address);
 node_node* process2(node_node *node);
-void process3(node_node *node);
+node_node* process3(node_node *node);
 
 
 

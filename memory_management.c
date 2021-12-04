@@ -151,7 +151,7 @@ int get_physical_address(uint64_t virtual_address, int process_id, uint64_t* phy
 	}
 	*physical_address = node -> physical_address;
 
-	process3(node);
+	node = process3(node);
 	
 	*tlb_hit = node -> i;
 	
@@ -210,6 +210,7 @@ node_node* check_tlb_hit(node_queue *head, node_node *p_node) {
 		actual = actual -> next;
 	}
 	p_node -> k = -2;
+	p_node -> i = 0;
 	//*tlb_hit1 = 0; //value for the test if it is no tlb hit
 	rwlock_release_readlock(lck1);///////////////////////////////////////////////////////////////release read lock
 	return p_node;
@@ -523,7 +524,7 @@ node_node* process2(node_node *node) {
 	return node;
 }
 
-void process3(node_node *node) {
+node_node* process3(node_node *node) {
 	
 	//rwlock_aquire_readlock(lck2);////////////////////////////////////////read_aquire
 	node = check_tlb_hit(tlb_list_head, node);
@@ -534,6 +535,7 @@ void process3(node_node *node) {
 		node -> k = 0;
 		check_PageTable_and_add(node);
 		node -> i = 0;
+		return node;
 		//rwlock_release_readlock(lck2);//////////////////////////////////////////////////release_read
 		//printf("Return value of check_PageTable_and_add = %d\n", i);
 		
@@ -545,10 +547,13 @@ void process3(node_node *node) {
 		node -> k = 0;
 		check_PageTable_and_add(node);
 		node -> i = 0;
+		return node;
 		//rwlock_release_readlock(lck2);//////////////////////////////////////////////////release_read
 		////printf("Return value of check_PageTable_and_add = %d\n", i);
 		
 	}
+	node -> i = 0;
+	return node;
 	//if (node -> k >= 0){
 		//printf("tlb-hit, the value of the page_frame is = %d\n", i);
 		//return node -> i;
@@ -556,7 +561,8 @@ void process3(node_node *node) {
 
 	
 	//free(mutex);
-	//free(node);
+	free(node);
+	//free_queue(tlb_list_head);
 	
 }
 
