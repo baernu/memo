@@ -191,7 +191,7 @@ int size_actual_list(node_node *head, int size) {
         node = node -> next;
         i++;
     } 
-    if (i <= size) {
+    if (i < size) {
         return i;
     } else {
         return -1;

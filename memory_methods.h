@@ -7,8 +7,8 @@
 
 void calculate_physical_address(uint64_t virtual_address);
 void initialize_free_frame_list(int i);
-int check_tlb_hit(node_queue *head,  node_node *node);
-node_node* add_node_and_member_pf(node_node *member);
+node_node* check_tlb_hit(node_queue *head,  node_node *node);
+node_node* add_node_and_member_pf(node_node *node, node_node *member);
 node_node* add_reference_pt(node_node *node, node_node *member);
 int check_pf(node_node *member);
 int check_ptable(node_node *member); 
@@ -23,6 +23,9 @@ int check_pf_number_exists(node_node *node);
 int check_pf_node_exists(node_node *node);
 node_node* remove_first_node(node_node *head); 
 node_node* process1(uint64_t virtual_address);
+node_node* process2(node_node *node);
+void process3(node_node *node);
+
 
 
 
